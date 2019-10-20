@@ -154,20 +154,20 @@ struct SDOrcasHeart : Module {
 
     SDOrcasHeart() {
         config(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS);
-        configParam(LENGTH_PARAM, 1.f, 32.f, 8.f, "length");
-        configParam(SPEED_PARAM, 20.f, 2000.f, 400.f, "speed");
-        configParam(ALGO_X_PARAM, 0.f, 127.f, 0.f, "algo x");
-        configParam(ALGO_Y_PARAM, 0.f, 127.f, 0.f, "algo y");
-        configParam(SHIFT_PARAM, 0.f, 12.f, 0.f, "shift");
-        configParam(SPACE_PARAM, 0.f, SPACEPRESETCOUNT - 1.f, 0.f, "space");
-        configParam(TRANSPOSE_PARAM, -2.f, 2.f, 0.f, "transpose");
-        configParam(GATE_LEN_PARAM, 0.1f, 4.0f, 1.f, "gate length");
-        configParam(SCALE_PARAM, 0.f, 1.f, 0.f, "scale a/b");
-        configParam(SCALE_A_PARAM, 0.f, 1.f, 1.f, "+ octave a");
-        configParam(SCALE_B_PARAM, 0.f, 1.f, 0.f, "+ octave b");
+        configParam(LENGTH_PARAM, 1.f, 32.f, 8.f, "Length");
+        configParam(SPEED_PARAM, 20.f, 2000.f, 400.f, "Speed");
+        configParam(ALGO_X_PARAM, 0.f, 127.f, 0.f, "Algo X");
+        configParam(ALGO_Y_PARAM, 0.f, 127.f, 0.f, "Algo Y");
+        configParam(SHIFT_PARAM, 0.f, 12.f, 0.f, "Shift");
+        configParam(SPACE_PARAM, 0.f, SPACEPRESETCOUNT - 1.f, 0.f, "Space");
+        configParam(TRANSPOSE_PARAM, -2.f, 2.f, 0.f, "Transpose");
+        configParam(GATE_LEN_PARAM, 0.1f, 4.0f, 1.f, "Gate length");
+        configParam(SCALE_PARAM, 0.f, 1.f, 0.f, "Scale A/B");
+        configParam(SCALE_A_PARAM, 0.f, 1.f, 1.f, "+ Octave A");
+        configParam(SCALE_B_PARAM, 0.f, 1.f, 0.f, "+ Octave B");
         
         for (int i = 0; i < SCALELEN * SCALECOUNT; i++)
-            configParam(SCALE_1_PARAM + i, 0.f, 1.f, 0.f, "scale");
+            configParam(SCALE_1_PARAM + i, 0.f, 1.f, 0.f, "Scale");
         
         updateScaleLeds();
     }
