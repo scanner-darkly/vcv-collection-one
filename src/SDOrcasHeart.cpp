@@ -181,32 +181,32 @@ struct SDOrcasHeart : Module {
     float internalClock, speed, gateLength, transpose;
     int length, speedBPM, algoX, algoY, shift, space;
 
-    int scales[SCALECOUNT][SCALELEN] = {0};
-    int scaleCount[SCALECOUNT] = {1};
+    int scales[SCALECOUNT][SCALELEN] = {{0}};
+    int scaleCount[SCALECOUNT] = {{1}};
     int scale = 0;
 
     int globalCounter = 0;
     int spaceCounter = 0;
     int paramUpdateCount = PARAMCYCLE;
 
-    int counter[TRACKCOUNT] = {0};
+    int counter[TRACKCOUNT] = {{0}};
     int divisor[TRACKCOUNT] = {2, 3, 5, 4};
     int phase[TRACKCOUNT]   = {2, 3, 5, 4};
     int weights[TRACKCOUNT] = {1, 2, 4, 7};
-    int shifts[TRACKCOUNT] = {0};
+    int shifts[TRACKCOUNT] = {{0}};
 
-    int trackOn[TRACKCOUNT] = {0};
-    int weightOn[TRACKCOUNT] = {0};
+    int trackOn[TRACKCOUNT] = {{0}};
+    int weightOn[TRACKCOUNT] = {{0}};
     int totalWeight = 0;
 
     int notes[NOTECOUNT];
-    bool gateOn[NOTECOUNT] = {0};
-    bool gateChanged[NOTECOUNT] = {1};
-    float gateTimer[NOTECOUNT] = {0};
+    bool gateOn[NOTECOUNT] = {{0}};
+    bool gateChanged[NOTECOUNT] = {{1}};
+    float gateTimer[NOTECOUNT] = {{0}};
 
     int modCvs[MODCOUNT];
-    bool modGateOn[MODCOUNT] = {0};
-    bool modGateChanged[MODCOUNT] = {1};
+    bool modGateOn[MODCOUNT] = {{0}};
+    bool modGateChanged[MODCOUNT] = {{1}};
     
     float getValue(int param) {
         float min = paramQuantities[param]->minValue;
