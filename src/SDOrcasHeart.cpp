@@ -437,7 +437,7 @@ struct SDOrcasHeart : Module {
         textDisplay->lines[0]->text = "LENGTH: " + std::to_string(length);
         textDisplay->lines[1]->text = "SPEED : " + std::to_string(speedBPM);
         textDisplay->lines[2]->text = "ALGO X: " + std::to_string(algoX);
-        textDisplay->lines[3]->text = "ALGO X: " + std::to_string(algoY);
+        textDisplay->lines[3]->text = "ALGO Y: " + std::to_string(algoY);
         textDisplay->lines[4]->text = "SHIFT : " + std::to_string(shift);
         textDisplay->lines[5]->text = "SPACE : " + std::to_string(space);
         textDisplay->lines[6]->text = "TRANS : " + (transpose < 0 ? std::to_string(transpose).substr(0, 5) : std::to_string(transpose).substr(0, 4));
