@@ -56,9 +56,9 @@ deploy:
   provider: releases
   api_key:
     secure: gQ6TqrkMFfc2YBzjMoVA6slkaqt8eCTZTntXrJqG7cQb2UR6tasIffwAhXUHndoGqqOpBKYA9Kpoa/0TWZHqDgH+Lodn0c1xwm3GGqe5T4fCNGZ5L7PcXX0YrVkTlX3qPBs33S5AN8DsteGymbeyAv1FHy1AjAjnY4I/UdOd03d+mx4w/aSJ/kyx27lCCQLKjwazabU+pDl1IlLvIWDR+eI9MemReEh9U+4DvAx3XU8GKyvGsrU6EW1Q26b3y5rquTtXsEfqfxUALscen8oGbklBv+hvMjsav2e3PdD8AoG0z2BDPgNHGS5sSTZ0kcD1WJ3OdYRRnlegkMNEpOZHQEymNeYsBYOAz/faD2pTzrKyf3TlAWwkPzMUTt/MamGMhgccqEQdSG+Oam8Z3d2OXzefBYo/S+4+r6gdx3LKHbED3jzg+xiKkEFVzEZpdilXFQoyqwFpeZcoJA7UafKYTTlTXEmKgCtsBXT3zjQFzumSu3X/HjE1kn0JaGXtUTJJWBnUdx72MRRJnY7NH8Oc1rG15IPxn1DQJmf0Rp8nDoja0WthTo9B9hJfNlUf+WB6vSQS8AFZWnkHMBpT10oYxQd8spuWO7SPE+vAlNC2oHrK3nKyNAqzKIyrlUj+BGhu2ysuA+qBNF6SWOb1Q/TS8upBNRhlj3Zq4Wk08UR6CVk=
-  file: dist/scanner-darkly-*-*.zip
+  file_glob: true
+  file: dist/scanner-darkly-collection-one-*.zip
+  skip_cleanup: true
   on:
     repo: scanner-darkly/vcv-collection-one
-    branches:
-      only:
-        - master
+    tags: true
