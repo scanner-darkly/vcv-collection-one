@@ -161,7 +161,7 @@ struct SDOrcasHeart : Module {
         configParam(SHIFT_PARAM, 0.f, 12.f, 0.f, "Shift");
         configParam(SPACE_PARAM, 0.f, SPACEPRESETCOUNT - 1.f, 0.f, "Space");
         configParam(TRANSPOSE_PARAM, -2.f, 2.f, 0.f, "Transpose");
-        configParam(GATE_LEN_PARAM, 0.1f, 4.0f, 1.f, "Gate length");
+        configParam(GATE_LEN_PARAM, 0.1f, 4.0f, 1.f, "Gate Length");
         configParam(SCALE_PARAM, 0.f, 1.f, 0.f, "Scale A/B");
         configParam(SCALE_A_PARAM, 0.f, 1.f, 1.f, "+ Octave A");
         configParam(SCALE_B_PARAM, 0.f, 1.f, 0.f, "+ Octave B");
@@ -178,7 +178,7 @@ struct SDOrcasHeart : Module {
     dsp::SchmittTrigger clockIn, resetIn, scaleSwitchTrig, scaleInputTrig;
     dsp::PulseGenerator clockOut, resetOut;
     
-    float internalClock, speed, gateLength, transpose;
+    float internalClock = 2.f, speed, gateLength, transpose;
     int length, speedBPM, algoX, algoY, shift, space;
 
     int scales[SCALECOUNT][SCALELEN] = {{0}};
@@ -393,10 +393,11 @@ struct SDOrcasHeart : Module {
             clockOut.trigger(1e-3);
         }
         
-        if ((scale == 0 && getValue(SCALE_A_PARAM) > 0) || (scale == 1 && getValue(SCALE_B_PARAM) > 0)) transpose += 1.f;
+        float trans = transpose;
+        if ((scale == 0 && getValue(SCALE_A_PARAM) > 0) || (scale == 1 && getValue(SCALE_B_PARAM) > 0)) trans += 1.f;
         
         for (int n = 0; n < NOTECOUNT; n++) {
-            outputs[CV_1_OUTPUT + n].setVoltage(scales[scale][notes[n] % scaleCount[scale]] / 12.f + std::min(2, notes[n] / 12) + transpose);
+            outputs[CV_1_OUTPUT + n].setVoltage(scales[scale][notes[n] % scaleCount[scale]] / 12.f + std::min(2, notes[n] / 12) + trans);
 
             int sp = spacePresets[(space | n) % SPACEPRESETCOUNT];
             if (sp & spaceCounter) {
