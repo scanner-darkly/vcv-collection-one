@@ -59,3 +59,6 @@ deploy:
   file: dist/scanner-darkly-*-*.zip
   on:
     repo: scanner-darkly/vcv-collection-one
+    branches:
+      only:
+        - master

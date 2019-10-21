@@ -181,8 +181,8 @@ struct SDOrcasHeart : Module {
     float internalClock = 2.f, speed, gateLength, transpose;
     int length, speedBPM, algoX, algoY, shift, space;
 
-    int scales[SCALECOUNT][SCALELEN] = {0};
-    int scaleCount[SCALECOUNT] = {1};
+    int scales[SCALECOUNT][SCALELEN] = {};
+    int scaleCount[SCALECOUNT] = {};
     int scale = 0;
 
     int globalCounter = 0;
