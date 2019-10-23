@@ -2,7 +2,7 @@
   "slug": "scanner-darkly-collection-one",
   "name": "Collection One",
   "version": "1.0.1",
-  "license": "proprietary",
+  "license": "GPL-3.0-only",
   "brand": "Scanner Darkly",
   "author": "scanner-darkly",
   "authorEmail": "",
