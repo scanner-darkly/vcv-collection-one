@@ -249,10 +249,6 @@ struct SDOrcasHeart : Module {
                     scales[s][scaleCount[s]++] = i;
                 }
             }
-            if (scaleCount[s] == 0) {
-                scaleCount[s] = 1;
-                scales[s][0] = 0;
-            }
         }
     }
 
@@ -397,16 +393,20 @@ struct SDOrcasHeart : Module {
         if ((scale == 0 && getValue(SCALE_A_PARAM) > 0) || (scale == 1 && getValue(SCALE_B_PARAM) > 0)) trans += 1.f;
         
         for (int n = 0; n < NOTECOUNT; n++) {
-            outputs[CV_1_OUTPUT + n].setVoltage(scales[scale][notes[n] % scaleCount[scale]] / 12.f + std::min(2, notes[n] / 12) + trans);
-
-            int sp = spacePresets[(space | n) % SPACEPRESETCOUNT];
-            if (sp & spaceCounter) {
+            if (scaleCount[scale] == 0) {
+                outputs[CV_1_OUTPUT + n].setVoltage(scales[scale][0] / 12.f);
                 outputs[GATE_1_OUTPUT + n].setVoltage(0);
             } else {
-                if (gateTimer[n] > 0) gateTimer[n] -= args.sampleTime;
-                if (gateTimer[n] < 0) gateTimer[n] = 0;
-                float g = 10.0; // (float)(modCvs[n] % 8) / 4.0 + 5.0;
-                outputs[GATE_1_OUTPUT + n].setVoltage(gateTimer[n] > 0 ? g : 0);
+                outputs[CV_1_OUTPUT + n].setVoltage(scales[scale][notes[n] % scaleCount[scale]] / 12.f + std::min(2, notes[n] / 12) + trans);
+                int sp = spacePresets[(space | n) % SPACEPRESETCOUNT];
+                if (sp & spaceCounter) {
+                    outputs[GATE_1_OUTPUT + n].setVoltage(0);
+                } else {
+                    if (gateTimer[n] > 0) gateTimer[n] -= args.sampleTime;
+                    if (gateTimer[n] < 0) gateTimer[n] = 0;
+                    float g = 10.0; // (float)(modCvs[n] % 8) / 4.0 + 5.0;
+                    outputs[GATE_1_OUTPUT + n].setVoltage(gateTimer[n] > 0 ? g : 0);
+                }
             }
         }
         
