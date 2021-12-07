@@ -482,20 +482,6 @@ struct SDOrcasHeart : Module {
         textDisplay->lines[5]->text = "SPACE : " + std::to_string(space);
         textDisplay->lines[6]->text = "TRANS : " + (transpose < 0 ? std::to_string(transpose).substr(0, 5) : std::to_string(transpose).substr(0, 4));
         textDisplay->lines[7]->text = "GATE L: " + std::to_string(gateLength).substr(0, 3);
-
-        /*
-        for (int i = 0; i < 4; i++) {
-            for (int b = 0; b < 4; b++) {
-                if (ledScreen) ledScreen->set((i << 2) + b, 0, notes[i] & (1 << b) ? 0xff : 0);
-            }
-        }
-
-        if (ledScreen) {
-            for (int y = ledScreen->MAXY - 1; y > 0; y--)
-                for (int x = 0; x < ledScreen->MAXX; x++)
-                    ledScreen->dots[x][y] = ledScreen->dots[x][y-1] ? ledScreen->dots[x][y-1] - 5 : 0;
-        }
-        */
     }
 };
 
