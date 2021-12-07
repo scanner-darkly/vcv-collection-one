@@ -18,17 +18,20 @@ jobs:
         - {
             name: Linux,
             os: ubuntu-latest,
-            prepare-os: sudo apt install -y libglu-dev
+            prepare-os: "sudo apt install -y libglu-dev",
+            suffix: lin
           }
         - {
             name: MacOS,
             os: macos-latest,
-            prepare-os: ""
+            prepare-os: "",
+            suffix: mac
           }
         - {
             name: Windows,
             os: windows-latest,
-            prepare-os: export CC=gcc
+            prepare-os: "export CC=gcc",
+            suffix: win
           }
     steps:
       - uses: actions/checkout@v2
@@ -37,7 +40,7 @@ jobs:
       - name: Get Rack-SDK
         run: |
           pushd $HOME
-          curl -o Rack-SDK.zip https://vcvrack.com/downloads/Rack-SDK-${{ env.rack-sdk-version }}.zip
+          curl -o Rack-SDK.zip https://vcvrack.com/downloads/Rack-SDK-${{ env.rack-sdk-version }}${{ matrix.config.suffix }}.zip
           unzip Rack-SDK.zip
       - name: Patch plugin.mk, use 7zip on Windows
         if: runner.os == 'Windows'
