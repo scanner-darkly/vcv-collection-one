@@ -202,11 +202,11 @@ struct SDOrcasHeart : Module {
         configOutput(MOD_GATE_3_OUTPUT, "Modulation Gate #3");
         configOutput(MOD_GATE_4_OUTPUT, "Modulation Gate #4");
         
-        configLight(SCALE_A_LIGHT, "Scale A Selected");
-        configLight(SCALE_B_LIGHT, "Scale B Selected");
-        
         for (int i = 0; i < SCALELEN * SCALECOUNT; i++)
             configSwitch(SCALE_1_PARAM + i, 0, 1, 0, "Note", {"Off", "On"});
+        
+        configLight(SCALE_A_LIGHT, "Scale A Selected");
+        configLight(SCALE_B_LIGHT, "Scale B Selected");
         
         updateScaleLeds();
     }
