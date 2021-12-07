@@ -70,7 +70,7 @@ jobs:
           path: _artifacts
       - name: check
         run: |
-        ls -R _artifacts
+          ls -R _artifacts
 
   publish:
     name: Publish plugin
