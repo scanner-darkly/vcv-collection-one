@@ -162,12 +162,51 @@ struct SDOrcasHeart : Module {
         configParam(SPACE_PARAM, 0.f, SPACEPRESETCOUNT - 1.f, 0.f, "Space");
         configParam(TRANSPOSE_PARAM, -2.f, 2.f, 0.f, "Transpose");
         configParam(GATE_LEN_PARAM, 0.1f, 4.0f, 1.f, "Gate Length");
-        configParam(SCALE_PARAM, 0.f, 1.f, 0.f, "Scale A/B");
-        configParam(SCALE_A_PARAM, 0.f, 1.f, 1.f, "+ Octave A");
-        configParam(SCALE_B_PARAM, 0.f, 1.f, 0.f, "+ Octave B");
+        
+        configButton(SCALE_PARAM, "Scale A/B");
+        configSwitch(SCALE_A_PARAM, 0, 1, 1, "Octave A", {"Down", "Up"});
+        configSwitch(SCALE_B_PARAM, 0, 1, 0, "Octave B", {"Down", "Up"});
+        
+        configInput(LENGTH_INPUT, "Length");
+        configInput(SPEED_INPUT, "Speed");
+        configInput(ALGO_X_INPUT, "Algo X");
+        configInput(ALGO_Y_INPUT, "Algo Y");
+        configInput(SHIFT_INPUT, "Shift");
+        configInput(SPACE_INPUT, "Space");
+        configInput(TRANSPOSE_INPUT, "Transpose");
+        configInput(GATE_LEN_INPUT, "Gate Length");
+        configInput(SCALE_INPUT, "Scale A/B");
+        configInput(SCALE_A_INPUT, "+ Octave A");
+        configInput(SCALE_B_INPUT, "+ Octave B");
+        configInput(CLOCK_INPUT, "Clock");
+        configInput(RESET_INPUT, "Reset");
+        configInput(EXP_1_INPUT, "Expansion 1 (unused)");
+        configInput(EXP_2_INPUT, "Expansion 2 (unused)");
+        
+        configOutput(CLOCK_OUTPUT, "Clock");
+        configOutput(RESET_OUTPUT, "Reset");
+        configOutput(CV_1_OUTPUT, "Note CV #1 1V/Oct");
+        configOutput(CV_2_OUTPUT, "Note CV #2 1V/Oct");
+        configOutput(CV_3_OUTPUT, "Note CV #3 1V/Oct");
+        configOutput(CV_4_OUTPUT, "Note CV #4 1V/Oct");
+        configOutput(GATE_1_OUTPUT, "Note Gate #1");
+        configOutput(GATE_2_OUTPUT, "Note Gate #2");
+        configOutput(GATE_3_OUTPUT, "Note Gate #3");
+        configOutput(GATE_4_OUTPUT, "Note Gate #4");
+        configOutput(MOD_CV_1_OUTPUT, "Modulation CV #1");
+        configOutput(MOD_CV_2_OUTPUT, "Modulation CV #2");
+        configOutput(MOD_CV_3_OUTPUT, "Modulation CV #3");
+        configOutput(MOD_CV_4_OUTPUT, "Modulation CV #4");
+        configOutput(MOD_GATE_1_OUTPUT, "Modulation Gate #1");
+        configOutput(MOD_GATE_2_OUTPUT, "Modulation Gate #2");
+        configOutput(MOD_GATE_3_OUTPUT, "Modulation Gate #3");
+        configOutput(MOD_GATE_4_OUTPUT, "Modulation Gate #4");
+        
+        configLight(SCALE_A_LIGHT, "Scale A Selected");
+        configLight(SCALE_B_LIGHT, "Scale B Selected");
         
         for (int i = 0; i < SCALELEN * SCALECOUNT; i++)
-            configParam(SCALE_1_PARAM + i, 0.f, 1.f, 0.f, "Scale");
+            configSwitch(SCALE_1_PARAM + i, 0, 1, 0, "Note", {"Off", "On"});
         
         updateScaleLeds();
     }
