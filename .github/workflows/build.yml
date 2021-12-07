@@ -103,9 +103,6 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           path: _artifacts
-      - name: check
-        run: |
-        ls -R _artifacts
       - name: Upload release assets
         uses: svenstaro/upload-release-action@v2
         with:
