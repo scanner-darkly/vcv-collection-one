@@ -28,6 +28,7 @@ struct SDTextDisplay : LedDisplay {
         for (int i = 0; i < DISPLAYLINES; i++) {
             lines[i] = createWidget<LedDisplayChoice>(pos);
             lines[i]->box.size.x = box.size.x;
+            lines[i]->text = "";
             addChild(lines[i]);
             pos.y += 14;
         }
@@ -472,7 +473,6 @@ struct SDOrcasHeart : Module {
         }
     }
 
-    std::stringstream stream;
     void updateDisplay() {
         textDisplay->lines[0]->text = "LENGTH: " + std::to_string(length);
         textDisplay->lines[1]->text = "SPEED : " + std::to_string(speedBPM);
