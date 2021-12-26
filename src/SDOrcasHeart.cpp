@@ -18,20 +18,35 @@
 #define SPACEPRESETCOUNT 16
 #define PARAMCYCLE 4
 
+template <class TModule>
 struct SDTextDisplay : LedDisplay {
 
-	LedDisplayChoice* lines[DISPLAYLINES];
+    TModule* module;
     
-    SDTextDisplay() {
-        Vec pos;
+    void drawLayer(const DrawArgs& args, int layer) override {
+        nvgScissor(args.vg, RECT_ARGS(args.clipBox));
 
-        for (int i = 0; i < DISPLAYLINES; i++) {
-            lines[i] = createWidget<LedDisplayChoice>(pos);
-            lines[i]->box.size.x = box.size.x;
-            lines[i]->text = "";
-            addChild(lines[i]);
-            pos.y += 14;
+        if (layer == 1 && module) {
+            std::string fontPath = asset::system("res/fonts/ShareTechMono-Regular.ttf");
+            std::shared_ptr<Font> font = APP->window->loadFont(fontPath);
+            if (!font) return;
+            
+            nvgFontSize(args.vg, 13);
+            nvgFontFaceId(args.vg, font->handle);
+            nvgFillColor(args.vg, SCHEME_YELLOW);
+            
+            nvgText(args.vg, 5.0, 17.0, ("LENGTH: " + std::to_string(module->length)).c_str(), NULL);
+            nvgText(args.vg, 5.0, 30.0, ("SPEED : " + std::to_string(module->speedBPM)).c_str(), NULL);
+            nvgText(args.vg, 5.0, 44.0, ("ALGO X: " + std::to_string(module->algoX)).c_str(), NULL);
+            nvgText(args.vg, 5.0, 58.0, ("ALGO Y: " + std::to_string(module->algoY)).c_str(), NULL);
+            nvgText(args.vg, 5.0, 72.0, ("SHIFT : " + std::to_string(module->shift)).c_str(), NULL);
+            nvgText(args.vg, 5.0, 86.0, ("SPACE : " + std::to_string(module->space)).c_str(), NULL);
+            nvgText(args.vg, 5.0, 100.0, ("TRANS : " + (module->transpose < 0 ? std::to_string(module->transpose).substr(0, 5) : std::to_string(module->transpose).substr(0, 4))).c_str(), NULL);
+            nvgText(args.vg, 5.0, 115.0, ("GATE L: " + std::to_string(module->gateLength).substr(0, 3)).c_str(), NULL);
         }
+
+        nvgResetScissor(args.vg);
+        LedDisplay::drawLayer(args, layer);
     }
 };
 
@@ -156,11 +171,16 @@ struct SDOrcasHeart : Module {
     SDOrcasHeart() {
         config(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS);
         configParam(LENGTH_PARAM, 1.f, 32.f, 8.f, "Length");
+        getParamQuantity(LENGTH_PARAM)->snapEnabled = true;
         configParam(SPEED_PARAM, 20.f, 2000.f, 400.f, "Speed");
-        configParam(ALGO_X_PARAM, 0.f, 127.f, 0.f, "Algo X");
-        configParam(ALGO_Y_PARAM, 0.f, 127.f, 0.f, "Algo Y");
+        configParam(ALGO_X_PARAM, 0.f, 127.f, 1.f, "Algo X");
+        getParamQuantity(ALGO_X_PARAM)->snapEnabled = true;
+        configParam(ALGO_Y_PARAM, 0.f, 127.f, 1.f, "Algo Y");
+        getParamQuantity(ALGO_Y_PARAM)->snapEnabled = true;
         configParam(SHIFT_PARAM, 0.f, 12.f, 0.f, "Shift");
+        getParamQuantity(SHIFT_PARAM)->snapEnabled = true;
         configParam(SPACE_PARAM, 0.f, SPACEPRESETCOUNT - 1.f, 0.f, "Space");
+        getParamQuantity(SPACE_PARAM)->snapEnabled = true;
         configParam(TRANSPOSE_PARAM, -2.f, 2.f, 0.f, "Transpose");
         configParam(GATE_LEN_PARAM, 0.1f, 4.0f, 1.f, "Gate Length");
         
@@ -203,17 +223,31 @@ struct SDOrcasHeart : Module {
         configOutput(MOD_GATE_3_OUTPUT, "Modulation Gate #3");
         configOutput(MOD_GATE_4_OUTPUT, "Modulation Gate #4");
         
-        for (int i = 0; i < SCALELEN * SCALECOUNT; i++)
-            configSwitch(SCALE_1_PARAM + i, 0, 1, 0, "Note", {"Off", "On"});
+        int scaleOffset;
+        for (int i = 0; i < SCALECOUNT; i++) {
+            scaleOffset = SCALE_1_PARAM + i * SCALELEN;
+            
+            configSwitch(scaleOffset + 0, 0, 1, i == 0, "C", {"Off", "On"});
+            configSwitch(scaleOffset + 1, 0, 1, 0, "C#", {"Off", "On"});
+            configSwitch(scaleOffset + 2, 0, 1, i == 0, "D", {"Off", "On"});
+            configSwitch(scaleOffset + 3, 0, 1, 0, "D#", {"Off", "On"});
+            
+            configSwitch(scaleOffset + 4, 0, 1, i == 0, "E", {"Off", "On"});
+            configSwitch(scaleOffset + 5, 0, 1, 0, "F", {"Off", "On"});
+            configSwitch(scaleOffset + 6, 0, 1, 0, "F#", {"Off", "On"});
+            configSwitch(scaleOffset + 7, 0, 1, 0, "G", {"Off", "On"});
+
+            configSwitch(scaleOffset + 8, 0, 1, 0, "G#", {"Off", "On"});
+            configSwitch(scaleOffset + 9, 0, 1, 0, "A", {"Off", "On"});
+            configSwitch(scaleOffset + 10, 0, 1, 0, "A#", {"Off", "On"});
+            configSwitch(scaleOffset + 11, 0, 1, 0, "B", {"Off", "On"});
+        }
         
         configLight(SCALE_A_LIGHT, "Scale A Selected");
         configLight(SCALE_B_LIGHT, "Scale B Selected");
         
         updateScaleLeds();
     }
-
-    LedScreen *ledScreen;
-    SDTextDisplay *textDisplay;
 
     dsp::SchmittTrigger clockIn, resetIn, scaleSwitchTrig, scaleInputTrig;
     dsp::PulseGenerator clockOut, resetOut;
@@ -425,7 +459,6 @@ struct SDOrcasHeart : Module {
             updateCounters();
             updateMod();
             for (int n = 0; n < NOTECOUNT; n++) calculateNextNote(n);
-            updateDisplay();
             clockOut.trigger(1e-3);
         }
         
@@ -471,17 +504,6 @@ struct SDOrcasHeart : Module {
             scale = json_integer_value(scaleJ);
             updateScaleLeds();
         }
-    }
-
-    void updateDisplay() {
-        textDisplay->lines[0]->text = "LENGTH: " + std::to_string(length);
-        textDisplay->lines[1]->text = "SPEED : " + std::to_string(speedBPM);
-        textDisplay->lines[2]->text = "ALGO X: " + std::to_string(algoX);
-        textDisplay->lines[3]->text = "ALGO Y: " + std::to_string(algoY);
-        textDisplay->lines[4]->text = "SHIFT : " + std::to_string(shift);
-        textDisplay->lines[5]->text = "SPACE : " + std::to_string(space);
-        textDisplay->lines[6]->text = "TRANS : " + (transpose < 0 ? std::to_string(transpose).substr(0, 5) : std::to_string(transpose).substr(0, 4));
-        textDisplay->lines[7]->text = "GATE L: " + std::to_string(gateLength).substr(0, 3);
     }
 };
 
@@ -568,22 +590,10 @@ struct SDOrcasHeartWidget : ModuleWidget {
         Vec displayPos = Vec(58.698, 13.988);
         Vec displaySize = Vec(35.004, 41.903);
 
-        SDTextDisplay *textDisplay = createWidget<SDTextDisplay>(mm2px(displayPos));
+        SDTextDisplay<SDOrcasHeart> *textDisplay = createWidget<SDTextDisplay<SDOrcasHeart>>(mm2px(displayPos));
         textDisplay->box.size = mm2px(displaySize);
+        textDisplay->module = module;
         addChild(textDisplay);
-        if (module) module->textDisplay = textDisplay;
-
-        /*
-        float ledWidth = 8.f;
-        float ledHeight = 8.f;
-        float ledX = displayPos.x + displaySize.x - ledWidth - 3.f;
-        float ledY = displayPos.y + (displaySize.y - ledHeight) / 2.f;
-        LedScreen *ledScreen = new LedScreen(module);
-        ledScreen->box.pos = mm2px(Vec(ledX, ledY));
-        ledScreen->box.size = mm2px(Vec(ledWidth, ledHeight));
-        addChild(ledScreen);
-        if (module) module->ledScreen = ledScreen;
-        */
     }
 };
 
