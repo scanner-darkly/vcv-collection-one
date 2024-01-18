@@ -16,7 +16,24 @@
       "slug": "SDOrcasHeart",
       "name": "Orca's Heart",
       "description": "quad algorithmic sequencer generator",
-      "tags": ["Arpeggiator", "Clock modulator", "Quad", "Sequencer"]
+      "tags": [
+        "Arpeggiator",
+        "Clock modulator",
+        "Quad",
+        "Sequencer"
+      ]
+    },
+    {
+      "slug": "SDOrcasHeartV2",
+      "name": "Orca's Heart V2",
+      "description": "octo algorithmic sequencer generator",
+      "tags": [
+        "Arpeggiator",
+        "Clock modulator",
+        "Polyphonic",
+        "Quad",
+        "Sequencer"
+      ]
     }
   ]
 }

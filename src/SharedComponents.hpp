@@ -15,6 +15,14 @@ struct SDLargeKnob : app::SvgKnob {
     }
 };
 
+struct SDMediumKnob : app::SvgKnob {
+    SDMediumKnob() {
+        minAngle = -0.83 * M_PI;
+        maxAngle = 0.83 * M_PI;
+        setSvg(APP->window->loadSvg(asset::plugin(pluginInstance, "res/sd_knob_med.svg")));
+    }
+};
+
 struct SDScaleSwitch : app::SvgSwitch {
     SDScaleSwitch() {
         addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/sd_scale_off_1.svg")));
