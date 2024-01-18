@@ -10,3 +10,4 @@ extern Plugin *pluginInstance;
 // extern Model *modelMyModule;
 
 extern Model *modelSDOrcasHeart;
+extern Model *modelSDOrcasHeartV2;

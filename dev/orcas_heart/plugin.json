@@ -16,7 +16,24 @@
       "slug": "scanner-darkly-collection-one-orcas-heart",
       "name": "Orca's Heart",
       "description": "quad algorithmic sequencer generator",
-      "tags": ["Arpeggiator", "Clock modulator", "Quad", "Sequencer"]
+      "tags": [
+        "Arpeggiator",
+        "Clock modulator",
+        "Quad",
+        "Sequencer"
+      ]
+    },
+    {
+      "slug": "SDOrcasHeart",
+      "name": "SDOrcasHeart",
+      "description": "",
+      "tags": []
+    },
+    {
+      "slug": "SDOrcasHeartV2",
+      "name": "SDOrcasHeartV2",
+      "description": "",
+      "tags": []
     }
   ]
 }
