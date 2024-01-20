@@ -350,13 +350,13 @@ struct SDOrcasHeartV2 : Module {
         shift = round(getCombinedValue(SHIFT_PARAM, SHIFT_INPUT));
         space = round(getCombinedValue(SPACE_PARAM, SPACE_INPUT));
         transpose = getCombinedValue(TRANSPOSE_PARAM, TRANSPOSE_INPUT);
-        gateLen = getCombinedValue(GATE_LEN_PARAM, GATE_LEN_INPUT);
-        gateLength = speed * gateLen;
-        spread = getCombinedValue(SPREAD_PARAM, SPREAD_INPUT);
     }
 
     void updateSyncedParameters() {
         rotate = round(getCombinedValue(ROTATE_PARAM, ROTATE_INPUT));
+        spread = getCombinedValue(SPREAD_PARAM, SPREAD_INPUT);
+        gateLen = getCombinedValue(GATE_LEN_PARAM, GATE_LEN_INPUT);
+        gateLength = speed * gateLen;
     }
 
     void updateTrackParameters() {
