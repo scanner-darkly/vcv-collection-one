@@ -38,7 +38,7 @@
     {
       "slug": "SDLines",
       "name": "Lines",
-      "description": "octo polyphonic voltage visualizer",
+      "description": "polyphonic voltage visualizer",
       "tags": [
         "Polyphonic",
         "Visual"

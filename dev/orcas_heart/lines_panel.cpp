@@ -36,6 +36,9 @@ struct LinesWidget : ModuleWidget {
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
         addInput(createInputCentered<SDPort>(mm2px(Vec(5.08, 119.155)), module, Lines::IN_INPUT));
+
+        // mm2px(Vec(10.16, 100.181))
+        addChild(createWidget<Widget>(mm2px(Vec(0.0, 10.463))));
     }
 };
 
