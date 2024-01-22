@@ -34,6 +34,15 @@
         "Quad",
         "Sequencer"
       ]
+    },
+    {
+      "slug": "SDLines",
+      "name": "Lines",
+      "description": "polyphonic voltage visualizer",
+      "tags": [
+        "Polyphonic",
+        "Visual"
+      ]
     }
   ]
 }
