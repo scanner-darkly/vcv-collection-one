@@ -25,11 +25,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.2"
-     inkscape:cx="294.09091"
-     inkscape:cy="254.54545"
+     inkscape:zoom="1.5556349"
+     inkscape:cx="296.98485"
+     inkscape:cy="284.77119"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="2644"
      inkscape:window-height="1338"
@@ -67,15 +67,22 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;font-family:'BrightonTwo SmallCaps NBP';-inkscape-font-specification:'BrightonTwo SmallCaps NBP, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#536c5d;stroke-width:0.329993"
-       x="0.69962317"
+       x="1.2949357"
        y="217.93259"
        id="text53"
        transform="scale(1.2472193,0.80178361)"><tspan
          sodipodi:role="line"
          id="tspan53"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;font-family:'BrightonTwo SmallCaps NBP';-inkscape-font-specification:'BrightonTwo SmallCaps NBP, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#536c5d;stroke-width:0.329993"
-         x="0.69962317"
-         y="217.93259">LINES</tspan></text>
+         x="1.2949357"
+         y="217.93259">SD   L</tspan></text>
+    <rect
+       style="display:inline;fill:#536c5d;stroke-width:0.247537"
+       id="rect54"
+       width="0.84200001"
+       height="0.84200001"
+       x="5.6704412"
+       y="172.72301" />
   </g>
   <g
      inkscape:groupmode="layer"
