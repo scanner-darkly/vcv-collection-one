@@ -65,7 +65,7 @@ jobs:
         with:
           path: dist
           name: ${{ matrix.config.name }}
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4.1.7
         with:
           path: _artifacts
       - name: check
@@ -100,7 +100,7 @@ jobs:
             ${{ env.GITHUB_REPOSITORY_NAME }} VCV Rack Plugin ${{ env.GITHUB_REF_NAME }}
           draft: false
           prerelease: false
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4.1.7
         with:
           path: _artifacts
       - name: Upload release assets
